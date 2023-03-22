@@ -1,18 +1,10 @@
-import 'package:dash_kit_core/dash_kit_core.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:lesson1/widgets/connected_loadable.dart';
+import 'package:lesson1/presentation/home/widgets/weather_days_list.dart';
+import 'package:lesson1/presentation/home/widgets/weather_today.dart';
+import 'package:lesson1/resourses/images.dart';
 
-import '../../app/operation.dart';
-import '../../features/geolocation/actions/get_geolocation_action.dart';
-import '../../features/weather/actions/get_weather_by_location_action.dart';
 import '../../models/weather_day.dart';
-import '../../navigation/app_router.dart';
-import '../../resourses/images.dart';
-import '../search/search_page.dart';
-import 'widgets/weather_days_list.dart';
-import 'widgets/weather_today.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({
@@ -23,10 +15,7 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage>
-    with SingleTickerProviderStateMixin {
-  final _chosenCity = ValueNotifier('Cupertino');
-  final List<String> pastSearchCities = [];
+class _HomePageState extends State<HomePage> {
   final List<WeatherDay> days = [
     WeatherDay(
       dayName: 'Monday',
@@ -57,117 +46,31 @@ class _HomePageState extends State<HomePage>
       weatherDescription: 'Sunny and bright',
     ),
   ];
-  late AnimationController _animationController;
-  late Animation<double> _curve;
-  late Animation<double> _animation;
-
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) => _getGeolocation());
-    _initAnimation();
-  }
-
-  void _initAnimation() {
-    _animationController = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 1200),
-    );
-    _curve = CurvedAnimation(
-      parent: _animationController,
-      curve: Curves.easeOut,
-    );
-    _animation = Tween<double>(begin: 0, end: 8).animate(_curve);
-    _animationController.forward();
-    _animation = Tween<double>(begin: 0, end: 8).animate(_curve)
-      ..addStatusListener((status) {
-        if (status == AnimationStatus.completed) {
-          _animationController.reverse();
-        } else if (status == AnimationStatus.dismissed) {
-          _animationController.forward();
-        }
-      });
-  }
-
-  void _getGeolocation() {
-    context
-        .dispatch(GetGeolocationAction())
-        .then((_) => _getWeatherByLocation())
-        .catchError((error) {
-      showSimpleDialog(
-        context: context,
-        title: 'Oops!',
-        text: error.toString(),
-      );
-    });
-  }
-
-  void _getWeatherByLocation() {
-    context.dispatch(GetWeatherByLocationAction());
-  }
-
-  void showSimpleDialog({
-    required BuildContext context,
-    required String title,
-    required String text,
-  }) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return CupertinoAlertDialog(
-          title: Text(title),
-          content: Text(text),
-          actions: [
-            CupertinoDialogAction(
-              onPressed: Navigator.of(context).pop,
-              child: const Text("Ok"),
-            ),
-          ],
-        );
-      },
-    );
-  }
-
-  @override
-  void dispose() {
-    _animationController.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFFFAFAFA),
       appBar: AppBar(
+        backgroundColor: const Color(0xFFFAFAFA),
         leading: IconButton(
           icon: SvgPicture.asset(Images.icLocation),
-          onPressed: _getGeolocation,
+          onPressed: () {},
         ),
         actions: [
           IconButton(
             icon: SvgPicture.asset(Images.icSearch),
-            onPressed: () => appRouter.goTo(
-              context: context,
-              route: SearchPage(
-                chosenCity: _chosenCity,
-                onCityChosen: () => setState(() {}),
-                pastSearchCities: pastSearchCities,
-              ),
-            ),
-          ),
+            onPressed: () {},
+          )
         ],
       ),
-      body: ConnectedLoadable(
-        converter: (s) =>
-            s.getOperationState(Operation.getGeolocation).isInProgress ||
-            s.getOperationState(Operation.getWeatherByLocation).isInProgress,
-        child: Column(
-          children: [
-            Expanded(
-              child: WeatherToday(animation: _animation),
-            ),
-            const WeatherDaysList(),
-          ],
-        ),
+      body: Column(
+        children: [
+          Expanded(
+            child: WeatherToday(weatherDay: days.first),
+          ),
+          WeatherDaysList(days: days),
+        ],
       ),
     );
   }
