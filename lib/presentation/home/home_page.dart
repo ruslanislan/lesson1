@@ -50,9 +50,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFFAFAFA),
       appBar: AppBar(
-        backgroundColor: const Color(0xFFFAFAFA),
         leading: IconButton(
           icon: SvgPicture.asset(Images.icLocation),
           onPressed: () {},
