@@ -9,7 +9,6 @@ class PastSearchBlock extends StatefulWidget {
     required this.onClearAllTap,
     Key? key,
   }) : super(key: key);
-
   final List<String> pastSearchCities;
   final VoidCallback onClearAllTap;
 
