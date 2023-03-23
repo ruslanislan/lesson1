@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lesson1/resourses/colors.dart';
 
 import '../../../models/weather_day.dart';
 import 'weather_list_item.dart';
@@ -21,7 +22,7 @@ class WeatherDaysList extends StatelessWidget {
           BoxShadow(
             offset: const Offset(0, -8),
             blurRadius: 12,
-            color: const Color(0xFF5C8396).withOpacity(0.05),
+            color: AppColors.weakBlue.withOpacity(0.05),
           )
         ],
       ),
@@ -35,7 +36,7 @@ class WeatherDaysList extends StatelessWidget {
               ),
               if (index != days.length - 1)
                 Divider(
-                  color: const Color(0xFF010E82).withOpacity(0.1),
+                  color: AppColors.deepPurple.withOpacity(0.1),
                   height: 16,
                   thickness: 1,
                 ),

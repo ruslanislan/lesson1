@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../resourses/colors.dart';
 
 const defaultFontFamily = 'Manrope';
 
@@ -14,7 +15,7 @@ class WeatherTheme {
   static final lightTheme = ThemeData.light().copyWith(
     brightness: Brightness.dark,
     appBarTheme: const AppBarTheme(
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.backgroundColor,
       elevation: 0,
     ),
     colorScheme: ColorScheme.fromSwatch(
@@ -22,7 +23,7 @@ class WeatherTheme {
     ).copyWith(
       secondary: Colors.indigoAccent,
     ),
-    scaffoldBackgroundColor: Colors.white,
+    scaffoldBackgroundColor: AppColors.backgroundColor,
     shadowColor: const Color.fromRGBO(255, 191, 0, 0.2),
     textTheme: const TextTheme(
       displayLarge: TextStyle(
