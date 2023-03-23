@@ -13,10 +13,14 @@ import 'widgets/search_text_field.dart';
 class SearchPage extends StatefulWidget {
   const SearchPage({
     Key? key,
-    required this.locationName,
+    required this.chosenCity,
+    required this.pastSearchCities,
+    required this.onCityChosen,
   }) : super(key: key);
 
-  final String locationName;
+  final ValueNotifier<String> chosenCity;
+  final List<String> pastSearchCities;
+  final VoidCallback onCityChosen;
 
   @override
   State<SearchPage> createState() => _SearchPageState();
@@ -25,8 +29,6 @@ class SearchPage extends StatefulWidget {
 class _SearchPageState extends State<SearchPage> {
   final _controller = TextEditingController();
   final _focusNode = FocusNode();
-  final List<String> pastSearchCities = [];
-  String? chosenCity;
 
   @override
   Widget build(BuildContext context) {
@@ -62,28 +64,37 @@ class _SearchPageState extends State<SearchPage> {
             ),
             const SizedBox(height: 32),
             if (!_focusNode.hasFocus) ...[
-              CurrentLocationWidget(locationName: widget.locationName),
+              CurrentLocationWidget(locationName: widget.chosenCity.value),
               const SizedBox(height: 24),
               Divider(
                 color: AppColors.deepPurple.withOpacity(0.1),
                 height: 1,
               ),
               const SizedBox(height: 24),
-              PastSearchBlock(
-                pastSearchCities: pastSearchCities,
-                onClearAllTap: () {},
+              Expanded(
+                child: PastSearchBlock(
+                  pastSearchCities: widget.pastSearchCities,
+                  onClearAllTap: () {},
+                ),
               ),
             ] else ...[
-              for (var item in testCities) ...[
-                CitiesListItemWidget(
-                  cityItem: item,
-                  onTap: () => onCityItemTap(item.city),
+              Expanded(
+                child: ListView.separated(
+                  physics: const NeverScrollableScrollPhysics(),
+                  padding: EdgeInsets.zero,
+                  itemCount: testCities.length,
+                  itemBuilder: (BuildContext context, int index) =>
+                      CitiesListItemWidget(
+                    cityItem: testCities[index],
+                    onTap: () => onCityItemTap(testCities[index].city),
+                  ),
+                  separatorBuilder: (BuildContext context, int index) =>
+                      Divider(
+                    color: AppColors.deepPurple.withOpacity(0.1),
+                    height: 1,
+                  ),
                 ),
-                Divider(
-                  color: AppColors.deepPurple.withOpacity(0.1),
-                  height: 1,
-                ),
-              ],
+              ),
             ],
           ],
         ),
@@ -93,9 +104,11 @@ class _SearchPageState extends State<SearchPage> {
 
   void onCityItemTap(String city) {
     setState(() {
-      pastSearchCities.add(city);
-      chosenCity = city;
+      widget.pastSearchCities.add(city);
+      widget.chosenCity.value = city;
       _focusNode.unfocus();
     });
+    widget.onCityChosen.call();
+    appRouter.goBack(context);
   }
 }

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:lesson1/presentation/home/widgets/weather_days_list.dart';
-import 'package:lesson1/presentation/home/widgets/weather_today.dart';
-import 'package:lesson1/resourses/images.dart';
 
 import '../../models/weather_day.dart';
 import '../../navigation/app_router.dart';
+import '../../resourses/images.dart';
 import '../search/search_page.dart';
+import 'widgets/weather_days_list.dart';
+import 'widgets/weather_today.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({
@@ -17,7 +17,10 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage>
+    with SingleTickerProviderStateMixin {
+  final _chosenCity = ValueNotifier('Cupertino');
+  final List<String> pastSearchCities = [];
   final List<WeatherDay> days = [
     WeatherDay(
       dayName: 'Monday',
@@ -48,6 +51,43 @@ class _HomePageState extends State<HomePage> {
       weatherDescription: 'Sunny and bright',
     ),
   ];
+  late AnimationController _animationController;
+  late Animation<double> _curve;
+  late Animation<double> _animation;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _initAnimation();
+  }
+
+  void _initAnimation() {
+    _animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 1200),
+    );
+    _curve = CurvedAnimation(
+      parent: _animationController,
+      curve: Curves.easeOut,
+    );
+    _animation = Tween<double>(begin: 0, end: 8).animate(_curve);
+    _animationController.forward();
+    _animation = Tween<double>(begin: 0, end: 8).animate(_curve)
+      ..addStatusListener((status) {
+        if (status == AnimationStatus.completed) {
+          _animationController.reverse();
+        } else if (status == AnimationStatus.dismissed) {
+          _animationController.forward();
+        }
+      });
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -62,15 +102,23 @@ class _HomePageState extends State<HomePage> {
             icon: SvgPicture.asset(Images.icSearch),
             onPressed: () => appRouter.goTo(
               context: context,
-              route: SearchPage(locationName: days.first.locationName),
+              route: SearchPage(
+                chosenCity: _chosenCity,
+                onCityChosen: () => setState(() {}),
+                pastSearchCities: pastSearchCities,
+              ),
             ),
-          )
+          ),
         ],
       ),
       body: Column(
         children: [
           Expanded(
-            child: WeatherToday(weatherDay: days.first),
+            child: WeatherToday(
+              weatherDay: days.first,
+              locationName: _chosenCity.value,
+              animation: _animation,
+            ),
           ),
           WeatherDaysList(days: days),
         ],
