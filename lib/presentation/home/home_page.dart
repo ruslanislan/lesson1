@@ -62,7 +62,7 @@ class _HomePageState extends State<HomePage> {
             icon: SvgPicture.asset(Images.icSearch),
             onPressed: () => appRouter.goTo(
               context: context,
-              route: SearchPage(locationName: days.first.locationName),
+              route: const SearchPage(),
             ),
           )
         ],
