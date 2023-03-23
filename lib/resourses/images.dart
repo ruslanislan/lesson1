@@ -27,4 +27,7 @@ class Images {
   static const ic13n = '$pngFolder/13n.png';
   static const ic50d = '$pngFolder/50d.png';
   static const ic50n = '$pngFolder/50n.png';
+
+  //png icons
+  static const icClose = '$pngFolder/ic_close.png';
 }
