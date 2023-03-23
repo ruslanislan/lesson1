@@ -5,6 +5,8 @@ import 'package:lesson1/presentation/home/widgets/weather_today.dart';
 import 'package:lesson1/resourses/images.dart';
 
 import '../../models/weather_day.dart';
+import '../../navigation/app_router.dart';
+import '../search/search_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({
@@ -58,7 +60,10 @@ class _HomePageState extends State<HomePage> {
         actions: [
           IconButton(
             icon: SvgPicture.asset(Images.icSearch),
-            onPressed: () {},
+            onPressed: () => appRouter.goTo(
+              context: context,
+              route: const SearchPage(),
+            ),
           )
         ],
       ),
