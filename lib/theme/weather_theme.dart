@@ -38,8 +38,15 @@ class WeatherTheme {
         fontFamily: defaultFontFamily,
         color: Colors.black,
         fontSize: 18,
-        height: 1.1,
+        height: 1.3,
         fontWeight: FontWeight.w400,
+      ),
+      headlineMedium: TextStyle(
+        fontFamily: defaultFontFamily,
+        color: Colors.black,
+        fontSize: 24,
+        height: 1.1,
+        fontWeight: FontWeight.w700,
       ),
       headlineSmall: TextStyle(
         fontFamily: defaultFontFamily,
