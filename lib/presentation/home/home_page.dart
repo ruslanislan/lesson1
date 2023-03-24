@@ -1,6 +1,9 @@
+import 'package:dash_kit_core/dash_kit_core.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../../features/geolocation/actions/get_geolocation_action.dart';
 import '../../models/weather_day.dart';
 import '../../navigation/app_router.dart';
 import '../../resourses/images.dart';
@@ -83,6 +86,44 @@ class _HomePageState extends State<HomePage>
       });
   }
 
+  void _getGeolocation() {
+    context.dispatch(GetGeolocationAction()).then((_) {
+      showSimpleDialog(
+        context: context,
+        title: 'Success!',
+        text: 'Geolocation received',
+      );
+    }).catchError((error) {
+      showSimpleDialog(
+        context: context,
+        title: 'Oops!',
+        text: error.toString(),
+      );
+    });
+  }
+
+  void showSimpleDialog({
+    required BuildContext context,
+    required String title,
+    required String text,
+  }) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return CupertinoAlertDialog(
+          title: Text(title),
+          content: Text(text),
+          actions: [
+            CupertinoDialogAction(
+              onPressed: Navigator.of(context).pop,
+              child: const Text("Ok"),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   void dispose() {
     _animationController.dispose();
@@ -95,7 +136,7 @@ class _HomePageState extends State<HomePage>
       appBar: AppBar(
         leading: IconButton(
           icon: SvgPicture.asset(Images.icLocation),
-          onPressed: () {},
+          onPressed: _getGeolocation,
         ),
         actions: [
           IconButton(
