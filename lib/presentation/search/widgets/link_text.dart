@@ -8,6 +8,7 @@ class LinkText extends StatelessWidget {
     required this.text,
     required this.onTap,
   }) : super(key: key);
+
   final String text;
   final VoidCallback onTap;
 

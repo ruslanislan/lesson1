@@ -9,6 +9,7 @@ class CitiesListItemWidget extends StatelessWidget {
     required this.cityItem,
     required this.onTap,
   }) : super(key: key);
+
   final CityItem cityItem;
   final VoidCallback onTap;
 
