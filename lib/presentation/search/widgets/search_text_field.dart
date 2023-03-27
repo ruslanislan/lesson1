@@ -12,6 +12,7 @@ class SearchTextField extends StatelessWidget {
     required this.onCloseTap,
     required this.onEditingCompleted,
   }) : super(key: key);
+
   final TextEditingController controller;
   final FocusNode focusNode;
   final VoidCallback onTap;
