@@ -15,4 +15,8 @@ class WeatherService {
   Future<DaysWeather> getDaysWeather(LocationPoint point) {
     return apiClient.getDaysWeather(point);
   }
+
+  Future<ForecastWeather> getForecastByCityName(String cityName) {
+    return apiClient.getForecastByCityName(cityName);
+  }
 }

@@ -45,4 +45,16 @@ class WeatherApiClient extends ApiClient {
       ),
     );
   }
+
+  Future<ForecastWeather> getForecastByCityName(String cityName) {
+    return get(
+      path: 'forecast', //forecast
+      queryParams: {
+        'q': cityName,
+      },
+      responseMapper: response_mappers.standard(
+            (data) => ForecastWeather.fromJson(data), //ForecastWeather
+      ),
+    );
+  }
 }
