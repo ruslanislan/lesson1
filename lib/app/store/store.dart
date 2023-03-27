@@ -1,5 +1,7 @@
 import 'package:async_redux/async_redux.dart';
 import 'package:get_it/get_it.dart';
+import 'package:lesson1/api_client/weather_api_client.dart';
+import 'package:lesson1/services/weather_service.dart';
 
 import '../../services/geolocation_service.dart';
 import '../app_state.dart';
@@ -19,7 +21,10 @@ Store<AppState> configureStore() {
   );
 }
 
-void configureDependencyInjection() {
+void configureDependencyInjection(WeatherApiClient apiClient) {
   final geolocationService = GeolocationService();
+  final weatherService = WeatherService(apiClient);
   GetIt.I.registerSingleton<GeolocationService>(geolocationService);
+  GetIt.I.registerSingleton<WeatherService>(weatherService);
+  GetIt.I.registerSingleton<WeatherApiClient>(apiClient);
 }

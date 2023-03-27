@@ -1,6 +1,7 @@
 // We use this package to make store immutable
 import 'package:built_value/built_value.dart';
 import 'package:dash_kit_core/dash_kit_core.dart';
+import 'package:lesson1/features/weather/weather_state.dart';
 
 import '../features/geolocation/geolocation_state.dart';
 
@@ -16,6 +17,8 @@ abstract class AppState
   // You should make ProfileState immutable either
   GeolocationState get geolocation;
 
+  WeatherState get weather;
+
   // // And implementation of GlobalState interface
   @override
   BuiltMap<Object, OperationState> get operationsState;
@@ -23,15 +26,15 @@ abstract class AppState
   // You should add an update of immutable state for operation inside this
   @override
   T updateOperation<T extends GlobalState>(
-      Object? operationKey,
-      OperationState operationState,
-      ) {
+    Object? operationKey,
+    OperationState operationState,
+  ) {
     if (operationKey == null) {
       return this as T;
     }
 
     final GlobalState newState = rebuild(
-          (s) => s.operationsState[operationKey] = operationState,
+      (s) => s.operationsState[operationKey] = operationState,
     );
     return newState as T;
   }
@@ -43,7 +46,9 @@ abstract class AppState
 
   static AppState initial() {
     return AppState(
-          (s) => s.geolocation = GeolocationState.initial().toBuilder(),
+      (s) => s
+        ..geolocation = GeolocationState.initial().toBuilder()
+        ..weather = WeatherState.initial().toBuilder(),
     );
   }
 }

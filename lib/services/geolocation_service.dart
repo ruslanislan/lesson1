@@ -1,6 +1,6 @@
 import 'package:geolocator/geolocator.dart';
 
-import '../models/location_point.dart';
+import '../models/network/responses/location_point/location_point.dart';
 
 class GeolocationService {
   Future<LocationPoint> getLocationPoint() async {

@@ -2,8 +2,11 @@ import 'package:dash_kit_core/dash_kit_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:lesson1/widgets/connected_loadable.dart';
 
+import '../../app/operation.dart';
 import '../../features/geolocation/actions/get_geolocation_action.dart';
+import '../../features/weather/actions/get_weather_by_location_action.dart';
 import '../../models/weather_day.dart';
 import '../../navigation/app_router.dart';
 import '../../resourses/images.dart';
@@ -61,7 +64,7 @@ class _HomePageState extends State<HomePage>
   @override
   void initState() {
     super.initState();
-
+    WidgetsBinding.instance.addPostFrameCallback((_) => _getGeolocation());
     _initAnimation();
   }
 
@@ -87,19 +90,20 @@ class _HomePageState extends State<HomePage>
   }
 
   void _getGeolocation() {
-    context.dispatch(GetGeolocationAction()).then((_) {
-      showSimpleDialog(
-        context: context,
-        title: 'Success!',
-        text: 'Geolocation received',
-      );
-    }).catchError((error) {
+    context
+        .dispatch(GetGeolocationAction())
+        .then((_) => _getWeatherByLocation())
+        .catchError((error) {
       showSimpleDialog(
         context: context,
         title: 'Oops!',
         text: error.toString(),
       );
     });
+  }
+
+  void _getWeatherByLocation() {
+    context.dispatch(GetWeatherByLocationAction());
   }
 
   void showSimpleDialog({
@@ -152,17 +156,18 @@ class _HomePageState extends State<HomePage>
           ),
         ],
       ),
-      body: Column(
-        children: [
-          Expanded(
-            child: WeatherToday(
-              weatherDay: days.first,
-              locationName: _chosenCity.value,
-              animation: _animation,
+      body: ConnectedLoadable(
+        converter: (s) =>
+            s.getOperationState(Operation.getGeolocation).isInProgress ||
+            s.getOperationState(Operation.getWeatherByLocation).isInProgress,
+        child: Column(
+          children: [
+            Expanded(
+              child: WeatherToday(animation: _animation),
             ),
-          ),
-          WeatherDaysList(days: days),
-        ],
+            const WeatherDaysList(),
+          ],
+        ),
       ),
     );
   }

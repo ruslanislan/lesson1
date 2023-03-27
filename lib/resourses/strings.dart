@@ -4,4 +4,5 @@ class Strings {
   static const getWeather = 'Get Weather';
   static const clearAll = 'Clear All';
   static const pastSearch = 'Past Search';
+  static const monday = 'Monday';
 }
