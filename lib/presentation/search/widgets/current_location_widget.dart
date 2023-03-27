@@ -9,6 +9,7 @@ class CurrentLocationWidget extends StatelessWidget {
     Key? key,
     required this.locationName,
   }) : super(key: key);
+
   final String locationName;
 
   @override
