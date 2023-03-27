@@ -4,6 +4,7 @@ import '../../../models/weather_day.dart';
 
 class WeatherListItem extends StatelessWidget {
   const WeatherListItem({Key? key, required this.weatherDay}) : super(key: key);
+
   final WeatherDay weatherDay;
 
   @override

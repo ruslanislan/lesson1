@@ -6,7 +6,9 @@ import 'weather_list_item.dart';
 
 class WeatherDaysList extends StatelessWidget {
   const WeatherDaysList({Key? key, required this.days}) : super(key: key);
+
   final List<WeatherDay> days;
+
   @override
   Widget build(BuildContext context) {
     return Container(

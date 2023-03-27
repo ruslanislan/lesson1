@@ -5,6 +5,7 @@ import 'package:lesson1/resourses/images.dart';
 
 class WeatherToday extends StatelessWidget {
   const WeatherToday({Key? key, required this.weatherDay}) : super(key: key);
+
   final WeatherDay weatherDay;
 
   @override
