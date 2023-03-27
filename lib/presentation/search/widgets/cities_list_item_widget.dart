@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../models/city_item.dart';
+import '../../../models/network/responses/city_item/city_item.dart';
 import '../../../resourses/colors.dart';
 
 class CitiesListItemWidget extends StatelessWidget {
@@ -24,7 +24,7 @@ class CitiesListItemWidget extends StatelessWidget {
         child: Row(
           children: [
             Text(
-              cityItem.city,
+              cityItem.name,
               style: Theme.of(context).textTheme.titleLarge,
             ),
             const SizedBox(width: 8),

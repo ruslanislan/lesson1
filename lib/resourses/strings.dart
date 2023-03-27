@@ -2,4 +2,5 @@
 class Strings {
   static String get appName => 'Weather app';
   static const getWeather = 'Get Weather';
+  static const monday = 'Monday';
 }

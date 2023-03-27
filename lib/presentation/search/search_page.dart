@@ -86,7 +86,7 @@ class _SearchPageState extends State<SearchPage> {
                   itemBuilder: (BuildContext context, int index) =>
                       CitiesListItemWidget(
                     cityItem: testCities[index],
-                    onTap: () => onCityItemTap(testCities[index].city),
+                    onTap: () => onCityItemTap(testCities[index].name),
                   ),
                   separatorBuilder: (BuildContext context, int index) =>
                       Divider(
