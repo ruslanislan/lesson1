@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../resourses/strings.dart';
 import 'link_text.dart';
 import 'past_search_item_widget.dart';
 
@@ -27,13 +28,13 @@ class _PastSearchBlockState extends State<PastSearchBlock> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              'Past Search',
+              Strings.pastSearch,
               style: Theme.of(context).textTheme.titleLarge?.copyWith(
                     fontWeight: FontWeight.w600,
                   ),
             ),
             LinkText(
-              text: 'Clear All',
+              text: Strings.clearAll,
               onTap: widget.onClearAllTap,
             ),
           ],

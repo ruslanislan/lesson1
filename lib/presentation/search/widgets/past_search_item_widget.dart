@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import '../../../resourses/images.dart';
 
 class PastSearchItemWidget extends StatelessWidget {
-  const PastSearchItemWidget(
-      {Key? key, required this.city, required this.onTap})
-      : super(key: key);
+  const PastSearchItemWidget({
+    Key? key,
+    required this.city,
+    required this.onTap,
+  }) : super(key: key);
 
   final String city;
   final VoidCallback onTap;
