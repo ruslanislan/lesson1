@@ -17,7 +17,7 @@ class LinkText extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Text(
-        'Clear All',
+        text,
         style: Theme.of(context).textTheme.titleLarge?.copyWith(
               color: AppColors.deepPurple,
               fontWeight: FontWeight.w300,
