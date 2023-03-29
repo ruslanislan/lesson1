@@ -28,22 +28,17 @@ class WeatherDaysList extends StatelessWidget {
           )
         ],
       ),
-      child: Column(
-        children: List.generate(
-          days.length,
-          (index) => Column(
-            children: [
-              WeatherListItem(
-                weatherDay: days[index],
-              ),
-              if (index != days.length - 1)
-                Divider(
-                  color: AppColors.deepPurple.withOpacity(0.1),
-                  height: 16,
-                  thickness: 1,
-                ),
-            ],
-          ),
+      child: ListView.separated(
+        shrinkWrap: true,
+        padding: EdgeInsets.zero,
+        itemCount: days.length,
+        itemBuilder: (BuildContext context, int index) => WeatherListItem(
+          weatherDay: days[index],
+        ),
+        separatorBuilder: (BuildContext context, int index) => Divider(
+          color: AppColors.deepPurple.withOpacity(0.1),
+          height: 16,
+          thickness: 1,
         ),
       ),
     );
