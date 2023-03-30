@@ -1,20 +1,32 @@
+import 'dart:async';
+
 import 'package:dash_kit_core/dash_kit_core.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
 import 'app/app_state.dart';
 import 'app/store/store.dart';
+import 'configuration/api_client.dart';
+import 'configuration/weather_api_environment.dart';
 import 'weather_app.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  configureDependencyInjection();
+  const environment = WeatherApiEnvironment.staging;
+  final apiClient = configureApiClient(environment);
+  configureDependencyInjection(apiClient);
+  await initializeDateFormatting();
 
   final store = configureStore();
 
-  runApp(
-    StoreProvider<AppState>(
-      store: store,
-      child: const WeatherApp(),
-    ),
-  );
+  runZonedGuarded(
+      () => runApp(
+            StoreProvider<AppState>(
+              store: store,
+              child: const WeatherApp(),
+            ),
+          ), (error, stack) {
+    print(error);
+    print(stack);
+  });
 }

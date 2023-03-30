@@ -2,7 +2,8 @@ library geolocation_state;
 
 import 'package:built_value/built_value.dart';
 
-import '../../models/location_point.dart';
+import '../../models/network/responses/location_point/location_point.dart';
+
 part 'geolocation_state.g.dart';
 
 abstract class GeolocationState
