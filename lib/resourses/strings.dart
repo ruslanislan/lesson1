@@ -5,4 +5,6 @@ class Strings {
   static const clearAll = 'Clear All';
   static const pastSearch = 'Past Search';
   static const monday = 'Monday';
+  static const oops = 'Oops!';
+  static const ok = 'Ok';
 }

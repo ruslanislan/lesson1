@@ -9,6 +9,7 @@ import '../../fixtures/city_items.dart';
 import '../../navigation/app_router.dart';
 import '../../resourses/colors.dart';
 import '../../resourses/images.dart';
+import '../../resourses/strings.dart';
 import 'widgets/cities_list_item_widget.dart';
 import 'widgets/current_location_widget.dart';
 import 'widgets/past_search_block.dart';
@@ -72,7 +73,7 @@ class SearchPage extends HookWidget {
               ),
               const SizedBox(height: 24),
               Text(
-                'Get Weather',
+                Strings.getWeather,
                 style: Theme.of(context).textTheme.headlineMedium,
               ),
               const SizedBox(height: 32),

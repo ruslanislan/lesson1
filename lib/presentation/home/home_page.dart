@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:lesson1/resourses/strings.dart';
 
 import '../../app/app_state.dart';
 import '../../app/operation.dart';
@@ -35,7 +36,7 @@ class HomePage extends HookWidget {
           actions: [
             CupertinoDialogAction(
               onPressed: Navigator.of(context).pop,
-              child: const Text("Ok"),
+              child: const Text(Strings.ok),
             ),
           ],
         );
@@ -59,7 +60,7 @@ class HomePage extends HookWidget {
           .catchError((error) {
         showSimpleDialog(
           context: context,
-          title: 'Oops!',
+          title: Strings.oops,
           text: error.toString(),
         );
       });
