@@ -26,5 +26,4 @@ void configureDependencyInjection(WeatherApiClient apiClient) {
   final weatherService = WeatherService(apiClient);
   GetIt.I.registerSingleton<GeolocationService>(geolocationService);
   GetIt.I.registerSingleton<WeatherService>(weatherService);
-  GetIt.I.registerSingleton<WeatherApiClient>(apiClient);
 }
