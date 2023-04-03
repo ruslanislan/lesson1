@@ -87,7 +87,7 @@ class HomePage extends HookWidget {
           IconButton(
             onPressed: () => appRouter.goTo(
               context: context,
-              route: SearchPage(pastSearchCities: pastSearchCities.value),
+              route: SearchPage(pastSearchCities: pastSearchCities),
             ),
             icon: SvgPicture.asset(
               Images.icSearch,

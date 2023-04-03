@@ -20,24 +20,21 @@ class SearchPage extends HookWidget {
     Key? key,
     required this.pastSearchCities,
   }) : super(key: key);
-  final List<String> pastSearchCities;
+  final ValueNotifier<List<String>> pastSearchCities;
 
   @override
   Widget build(BuildContext context) {
     final context = useContext();
     final controller = useTextEditingController();
     final focusNode = useFocusNode();
-    final dirty = useState(() {});
-
-    // ignore: prefer_function_declarations_over_variables
-    final setState = (VoidCallback callback) {
-      callback();
-      dirty.value = (){};
-    };
+    useListenable(focusNode);
+    useListenable(pastSearchCities);
+    useListenable(controller);
 
     // ignore: prefer_function_declarations_over_variables
     final onCityItemTap = (String city) {
-      pastSearchCities.add(city);
+      pastSearchCities.value =
+          List.unmodifiable([...pastSearchCities.value, city]);
       context.dispatch(GetWeatherByCityNameAction(cityName: city));
       focusNode.unfocus();
       appRouter.goBack(context);
@@ -48,7 +45,8 @@ class SearchPage extends HookWidget {
       required String cityName,
     }) {
       if (cityName.isNotEmpty) {
-        pastSearchCities.add(cityName);
+        pastSearchCities.value =
+            List.unmodifiable([...pastSearchCities.value, cityName]);
         context.dispatch(GetWeatherByCityNameAction(cityName: cityName));
         appRouter.goBack(context);
       }
@@ -80,11 +78,10 @@ class SearchPage extends HookWidget {
               SearchTextField(
                 controller: controller,
                 focusNode: focusNode,
-                onTap: () => setState(() {}),
-                onCloseTap: () => setState(() {
+                onCloseTap: () {
                   controller.clear();
                   focusNode.unfocus();
-                }),
+                },
                 onEditingCompleted: (String value) => onEditingComplete(
                   cityName: value,
                 ),
@@ -101,10 +98,9 @@ class SearchPage extends HookWidget {
                 const SizedBox(height: 24),
                 Expanded(
                   child: PastSearchBlock(
-                    pastSearchCities: pastSearchCities,
-                    onClearAllTap: () => setState(() {
-                      pastSearchCities.clear();
-                    }),
+                    pastSearchCities: pastSearchCities.value,
+                    onClearAllTap: () =>
+                        pastSearchCities.value = List.unmodifiable([]),
                   ),
                 ),
               ] else ...[

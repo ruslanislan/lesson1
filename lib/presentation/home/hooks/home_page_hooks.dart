@@ -11,12 +11,16 @@ Animation<double> useCurvedAnimation() {
     curve: Curves.easeOut,
   ));
 
-  animation.addStatusListener((status) {
-    if (status == AnimationStatus.completed) {
-      animationController.reverse();
-    } else if (status == AnimationStatus.dismissed) {
-      animationController.forward();
-    }
+  useEffect(() {
+    animation.addStatusListener((status) {
+      if (status == AnimationStatus.completed) {
+        animationController.reverse();
+      } else if (status == AnimationStatus.dismissed) {
+        animationController.forward();
+      }
+    });
+
+    return () => animation.removeStatusListener((status) {});
   });
 
   return animation;
