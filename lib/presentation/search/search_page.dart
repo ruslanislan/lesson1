@@ -1,8 +1,8 @@
 import 'package:dash_kit_core/dash_kit_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:lesson1/models/network/responses/city_item/city_item.dart';
 
-import '../../app/app_state.dart';
 import '../../core/app_store_connector.dart';
 import '../../features/weather/actions/get_weather_by_city_name_action.dart';
 import '../../fixtures/city_items.dart';
@@ -20,6 +20,7 @@ class SearchPage extends HookWidget {
     Key? key,
     required this.pastSearchCities,
   }) : super(key: key);
+
   final ValueNotifier<List<String>> pastSearchCities;
 
   @override
@@ -53,9 +54,9 @@ class SearchPage extends HookWidget {
     };
 
     return Scaffold(
-      body: AppStateConnector<AppState>(
-        converter: (state) => state,
-        builder: (context, state) => Padding(
+      body: AppStateConnector<CityItem?>(
+        converter: (state) => state.weather.currentCity,
+        builder: (context, currentCity) => Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -88,8 +89,7 @@ class SearchPage extends HookWidget {
               ),
               const SizedBox(height: 32),
               if (!focusNode.hasFocus) ...[
-                CurrentLocationWidget(
-                    locationName: state.weather.currentCity?.name ?? ''),
+                CurrentLocationWidget(locationName: currentCity?.name ?? ''),
                 const SizedBox(height: 24),
                 Divider(
                   color: AppColors.deepPurple.withOpacity(0.1),
