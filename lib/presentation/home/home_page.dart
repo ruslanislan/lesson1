@@ -11,9 +11,10 @@ import '../../features/geolocation/actions/get_geolocation_action.dart';
 import '../../features/weather/actions/get_weather_by_location_action.dart';
 import '../../navigation/app_router.dart';
 import '../../resourses/images.dart';
+import '../../utils/extensions.dart';
 import '../../widgets/connected_loadable.dart';
 import '../search/search_page.dart';
-import 'hooks/home_page_hooks.dart';
+import 'widgets/test_weather_today.dart';
 import 'widgets/weather_days_list.dart';
 import 'widgets/weather_today.dart';
 
@@ -107,7 +108,9 @@ class HomePage extends HookWidget {
         child: Column(
           children: [
             Expanded(
-              child: WeatherToday(animation: animation),
+              child: PlatformEnvironmentExtension.isTestingEnvironment
+                  ? const TestWeatherToday()
+                  : const WeatherToday(),
             ),
             const WeatherDaysList(),
           ],
