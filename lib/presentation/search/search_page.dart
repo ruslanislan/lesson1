@@ -1,6 +1,8 @@
 import 'package:dash_kit_core/dash_kit_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:lesson1/features/past_search_cities/actions/add_past_search_city_action.dart';
+import 'package:lesson1/features/past_search_cities/actions/clear_past_search_cities_action.dart';
 import 'package:lesson1/models/network/responses/city_item/city_item.dart';
 
 import '../../core/app_store_connector.dart';
@@ -18,10 +20,7 @@ import 'widgets/search_text_field.dart';
 class SearchPage extends HookWidget {
   const SearchPage({
     Key? key,
-    required this.pastSearchCities,
   }) : super(key: key);
-
-  final ValueNotifier<List<String>> pastSearchCities;
 
   @override
   Widget build(BuildContext context) {
@@ -29,13 +28,11 @@ class SearchPage extends HookWidget {
     final controller = useTextEditingController();
     final focusNode = useFocusNode();
     useListenable(focusNode);
-    useListenable(pastSearchCities);
     useListenable(controller);
 
     // ignore: prefer_function_declarations_over_variables
     final onCityItemTap = (String city) {
-      pastSearchCities.value =
-          List.unmodifiable([...pastSearchCities.value, city]);
+      context.dispatch(AddPastSearchCityAction(city));
       context.dispatch(GetWeatherByCityNameAction(cityName: city));
       focusNode.unfocus();
       appRouter.goBack(context);
@@ -46,8 +43,7 @@ class SearchPage extends HookWidget {
       required String cityName,
     }) {
       if (cityName.isNotEmpty) {
-        pastSearchCities.value =
-            List.unmodifiable([...pastSearchCities.value, cityName]);
+        context.dispatch(AddPastSearchCityAction(cityName));
         context.dispatch(GetWeatherByCityNameAction(cityName: cityName));
         appRouter.goBack(context);
       }
@@ -97,10 +93,14 @@ class SearchPage extends HookWidget {
                 ),
                 const SizedBox(height: 24),
                 Expanded(
-                  child: PastSearchBlock(
-                    pastSearchCities: pastSearchCities.value,
-                    onClearAllTap: () =>
-                        pastSearchCities.value = List.unmodifiable([]),
+                  child: AppStateConnector<List<String>>(
+                    converter: (state) =>
+                        state.pastSearchCities.pastSearchCities.toList(),
+                    builder: (context, pastSearchCities) => PastSearchBlock(
+                      pastSearchCities: pastSearchCities,
+                      onClearAllTap: () =>
+                          context.dispatch(ClearPastSearchCities()),
+                    ),
                   ),
                 ),
               ] else ...[

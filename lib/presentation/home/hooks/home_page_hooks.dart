@@ -6,26 +6,32 @@ Animation<double> useCurvedAnimation() {
     duration: const Duration(milliseconds: 1500),
   );
 
-  final animation = Tween<double>(begin: 0, end: 15).animate(CurvedAnimation(
-    parent: animationController,
-    curve: Curves.easeOut,
-  ));
+  final animation = useMemoized(
+        () => Tween<double>(begin: 0, end: 15).animate(
+      CurvedAnimation(
+        parent: animationController,
+        curve: Curves.easeOut,
+      ),
+    ),
+  );
 
   // print("i'm here");
 
   useEffect(() {
     // print('adding listener and start animation');
     animationController.forward();
-    animation.addStatusListener((status) {
+    final listener = (status) {
       if (status == AnimationStatus.completed) {
         animationController.reverse();
       } else if (status == AnimationStatus.dismissed) {
         animationController.forward();
       }
-    });
+    };
+
+    animationController.addStatusListener(listener);
 
     return () {
-      // print('dispose controller');
+      animationController.removeStatusListener(listener);
       animationController.dispose();
     };
   }, []);

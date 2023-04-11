@@ -49,7 +49,6 @@ class HomePage extends HookWidget {
     final context = useContext();
     final storeProvider = StoreProvider.of<AppState>(context, 'dispatcher');
     final dispatch = storeProvider.dispatchAsync;
-    final pastSearchCities = useState(<String>[]);
     final animation = useCurvedAnimation();
 
     // ignore: prefer_function_declarations_over_variables
@@ -87,7 +86,7 @@ class HomePage extends HookWidget {
           IconButton(
             onPressed: () => appRouter.goTo(
               context: context,
-              route: SearchPage(pastSearchCities: pastSearchCities),
+              route: const SearchPage(),
             ),
             icon: SvgPicture.asset(
               Images.icSearch,

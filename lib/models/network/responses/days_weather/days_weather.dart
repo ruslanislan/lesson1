@@ -1,10 +1,10 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import '../response_model/response_model.dart';
-import '../locality_day_weather/locality_day_weather.dart';
+
 import '../../../weather_day.dart';
+import '../locality_day_weather/locality_day_weather.dart';
+import '../response_model/response_model.dart';
 
 part 'days_weather.freezed.dart';
-
 part 'days_weather.g.dart';
 
 @freezed
