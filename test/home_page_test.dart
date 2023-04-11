@@ -42,25 +42,10 @@ void main() {
       //Test widget creation
       final page = TestStateWidget(
         initialState: state,
-        child: HomePage(),
+        child: const HomePage(),
       );
 
-      //pumpWidgetBuilder - extension for WidgetTester with
-      // a function pumpWidgetBuilder to allow for easy configuration
-      // of the parent widget tree & device configuration to emulate
-
-      // await tester.pumpWidgetBuilder(
-      //   page,
-      //   wrapper: (child) => TestStateWidget(
-      //     initialState: state,
-      //     child: child,
-      //   ),
-      // );
-      await tester.pumpAndSettle(const Duration(seconds: 2));
-
       await tester.pumpWidget(page);
-
-      await tester.pump(const Duration(seconds: 2));
 
       //multiScreenGolden will run scenarios for given devices list
       await multiScreenGolden(

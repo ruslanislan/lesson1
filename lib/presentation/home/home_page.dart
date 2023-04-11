@@ -50,7 +50,6 @@ class HomePage extends HookWidget {
     final context = useContext();
     final storeProvider = StoreProvider.of<AppState>(context, 'dispatcher');
     final dispatch = storeProvider.dispatchAsync;
-    final animation = useCurvedAnimation();
 
     // ignore: prefer_function_declarations_over_variables
     final getGeolocationByLocation = () {

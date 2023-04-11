@@ -34,10 +34,8 @@ void main() {
           ),
       );
 
-      final pastSearchCities = ValueNotifier<List<String>>([]);
-
       //Test widget creation
-      final page = SearchPage(pastSearchCities: pastSearchCities);
+      const page = SearchPage();
 
       //pumpWidgetBuilder - extension for WidgetTester with
       // a function pumpWidgetBuilder to allow for easy configuration
