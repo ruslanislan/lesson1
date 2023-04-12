@@ -93,9 +93,9 @@ class SearchPage extends HookWidget {
                 ),
                 const SizedBox(height: 24),
                 Expanded(
-                  child: AppStateConnector<List<String>>(
+                  child: AppStateConnector<BuiltList<String>>(
                     converter: (state) =>
-                        state.pastSearchCities.pastSearchCities.toList(),
+                        state.pastSearchCities.pastSearchCities,
                     builder: (context, pastSearchCities) => PastSearchBlock(
                       pastSearchCities: pastSearchCities,
                       onClearAllTap: () =>
