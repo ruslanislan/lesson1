@@ -29,7 +29,7 @@ class WeatherTheme {
       displayLarge: TextStyle(
         fontFamily: defaultFontFamily,
         color: Colors.black,
-        fontSize: 120,
+        fontSize: 100,
         fontWeight: FontWeight.w400,
         height: 1.1,
       ),
@@ -38,7 +38,7 @@ class WeatherTheme {
         fontFamily: defaultFontFamily,
         color: Colors.black,
         fontSize: 18,
-        height: 1.3,
+        height: 1.1,
         fontWeight: FontWeight.w400,
       ),
       headlineMedium: TextStyle(

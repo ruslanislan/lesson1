@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lesson1/models/weather_day.dart';
 import 'package:lesson1/resourses/images.dart';
 
 import '../../../core/app_store_connector.dart';
+import '../hooks/home_page_hooks.dart';
 
-class WeatherToday extends StatelessWidget {
+class WeatherToday extends HookWidget {
   const WeatherToday({
     Key? key,
-    required this.animation,
   }) : super(key: key);
-  final Animation<double> animation;
 
   @override
   Widget build(BuildContext context) {
+    final animation = useCurvedAnimation();
     return AppStateConnector<WeatherDay>(
         converter: (s) => s.weather.today,
         builder: (context, weatherDay) {

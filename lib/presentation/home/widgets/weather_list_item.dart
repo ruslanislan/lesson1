@@ -13,6 +13,7 @@ class WeatherListItem extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Expanded(
+          flex: 2,
           child: Text(
             weatherDay.dayName,
             style: Theme.of(context).textTheme.titleLarge,
