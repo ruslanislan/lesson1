@@ -30,7 +30,6 @@ class TestWeatherToday extends StatelessWidget {
                 ),
               ),
             ),
-            // const SizedBox(width: 26),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
