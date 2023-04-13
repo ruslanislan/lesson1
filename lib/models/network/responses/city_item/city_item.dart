@@ -1,9 +1,9 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import '../response_model/response_model.dart';
+
 import '../location_point/location_point.dart';
+import '../response_model/response_model.dart';
 
 part 'city_item.freezed.dart';
-
 part 'city_item.g.dart';
 
 @freezed

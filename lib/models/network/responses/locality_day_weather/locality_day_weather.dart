@@ -37,9 +37,6 @@ class LocalityDayWeather extends ResponseModel with _$LocalityDayWeather {
 
   String getWeatherImagePath() {
     final shortName = _getFirstDescription()?.icon;
-    if (shortName?.isNotEmpty ?? false) {
-      return '${Images.pngFolder}/$shortName.png';
-    }
-    return '';
+    return Images.getPngImage(shortName);
   }
 }

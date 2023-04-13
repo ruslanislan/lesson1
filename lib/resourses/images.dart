@@ -1,5 +1,12 @@
 // ignore: avoid_classes_with_only_static_members
 class Images {
+  static String getPngImage(String? asset) {
+    if (asset == null || asset.isEmpty) {
+      return '';
+    }
+    return '$pngFolder/$asset.png';
+  }
+
   static const svgFolder = 'assets/images/svg';
   static const pngFolder = 'assets/images/png';
 

@@ -4,7 +4,8 @@ import 'app_state.dart';
 import 'operation.dart';
 
 abstract class BaseAction extends Action<AppState> {
-  // Action<AppState> contains all logic for tracking state and uses ReduxAction inside;
+  // Action<AppState> contains all logic for tracking state and uses ReduxAction
+  // inside;
   BaseAction({
     bool isRefreshing = false,
   }) : super(isRefreshing: isRefreshing);

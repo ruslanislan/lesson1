@@ -1,6 +1,7 @@
 // We use this package to make store immutable
 import 'package:built_value/built_value.dart';
 import 'package:dash_kit_core/dash_kit_core.dart';
+import 'package:lesson1/features/past_search_cities/past_search_cities_state.dart';
 import 'package:lesson1/features/weather/weather_state.dart';
 
 import '../features/geolocation/geolocation_state.dart';
@@ -18,6 +19,8 @@ abstract class AppState
   GeolocationState get geolocation;
 
   WeatherState get weather;
+
+  PastSearchCitiesState get pastSearchCities;
 
   // // And implementation of GlobalState interface
   @override
@@ -48,7 +51,8 @@ abstract class AppState
     return AppState(
       (s) => s
         ..geolocation = GeolocationState.initial().toBuilder()
-        ..weather = WeatherState.initial().toBuilder(),
+        ..weather = WeatherState.initial().toBuilder()
+        ..pastSearchCities = PastSearchCitiesState.initial().toBuilder(),
     );
   }
 }

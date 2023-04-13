@@ -1,3 +1,4 @@
+import 'package:built_collection/built_collection.dart';
 import 'package:flutter/material.dart';
 
 import '../../../resourses/strings.dart';
@@ -11,7 +12,7 @@ class PastSearchBlock extends StatefulWidget {
     Key? key,
   }) : super(key: key);
 
-  final List<String> pastSearchCities;
+  final BuiltList<String> pastSearchCities;
   final VoidCallback onClearAllTap;
 
   @override
