@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:lesson1/core/hooks/push_notification_hooks.dart';
 import 'package:lesson1/resourses/strings.dart';
 
 import '../../app/app_state.dart';
@@ -47,6 +48,15 @@ class HomePage extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    useNotificationPermissionRequest();
+
+    usePushNotificationToken();
+
+    useFirebaseMessagingOpenedAppListener();
+    useFirebaseMessagingForegroundListener();
+    useFirebaseMessagingBackgroundListener();
+
     final context = useContext();
     final storeProvider = StoreProvider.of<AppState>(context, 'dispatcher');
     final dispatch = storeProvider.dispatchAsync;
