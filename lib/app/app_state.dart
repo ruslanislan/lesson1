@@ -1,10 +1,10 @@
 // We use this package to make store immutable
 import 'package:built_value/built_value.dart';
 import 'package:dash_kit_core/dash_kit_core.dart';
+import 'package:lesson1/features/battery/battery_state.dart';
+import 'package:lesson1/features/geolocation/geolocation_state.dart';
 import 'package:lesson1/features/past_search_cities/past_search_cities_state.dart';
 import 'package:lesson1/features/weather/weather_state.dart';
-
-import '../features/geolocation/geolocation_state.dart';
 
 part 'app_state.g.dart';
 
@@ -21,6 +21,8 @@ abstract class AppState
   WeatherState get weather;
 
   PastSearchCitiesState get pastSearchCities;
+
+  BatteryState get battery;
 
   // // And implementation of GlobalState interface
   @override
@@ -52,7 +54,8 @@ abstract class AppState
       (s) => s
         ..geolocation = GeolocationState.initial().toBuilder()
         ..weather = WeatherState.initial().toBuilder()
-        ..pastSearchCities = PastSearchCitiesState.initial().toBuilder(),
+        ..pastSearchCities = PastSearchCitiesState.initial().toBuilder()
+        ..battery = BatteryState.initial().toBuilder(),
     );
   }
 }

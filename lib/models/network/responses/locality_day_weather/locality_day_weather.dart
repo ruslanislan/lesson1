@@ -1,9 +1,9 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:intl/intl.dart'; //for date format
+import 'package:lesson1/resources/images.dart';
 import '../response_model/response_model.dart';
 import '../weather_description/weather_description.dart';
 import '../weather_temperatures/weather_temperatures.dart';
-import '../../../../resourses/images.dart';
 
 part 'locality_day_weather.freezed.dart';
 

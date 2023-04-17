@@ -3,21 +3,18 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:lesson1/app/app_state.dart';
+import 'package:lesson1/app/operation.dart';
 import 'package:lesson1/core/hooks/push_notification_hooks.dart';
-import 'package:lesson1/resourses/strings.dart';
-
-import '../../app/app_state.dart';
-import '../../app/operation.dart';
-import '../../features/geolocation/actions/get_geolocation_action.dart';
-import '../../features/weather/actions/get_weather_by_location_action.dart';
-import '../../navigation/app_router.dart';
-import '../../resourses/images.dart';
-import '../../utils/extensions.dart';
-import '../../widgets/connected_loadable.dart';
-import '../search/search_page.dart';
-import 'widgets/test_weather_today.dart';
-import 'widgets/weather_days_list.dart';
-import 'widgets/weather_today.dart';
+import 'package:lesson1/features/battery/actions/get_battery_level.dart';
+import 'package:lesson1/features/geolocation/actions/get_geolocation_action.dart';
+import 'package:lesson1/features/weather/actions/get_weather_by_location_action.dart';
+import 'package:lesson1/navigation/app_router.dart';
+import 'package:lesson1/presentation/home/widgets/widgets.dart';
+import 'package:lesson1/presentation/search/search_page.dart';
+import 'package:lesson1/resources/resources.dart';
+import 'package:lesson1/utils/extensions.dart';
+import 'package:lesson1/widgets/connected_loadable.dart';
 
 class HomePage extends HookWidget {
   const HomePage({
@@ -48,7 +45,6 @@ class HomePage extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-
     useNotificationPermissionRequest();
 
     usePushNotificationToken();
@@ -75,9 +71,19 @@ class HomePage extends HookWidget {
       });
     };
 
+    final getBatteryLevel = () {
+      dispatch(GetBatteryLevel()).then(
+        (value) => showSimpleDialog(
+          context: context,
+          title: Strings.batteryLevel,
+          text: storeProvider.state.battery.batteryLevel,
+        ),
+      );
+    };
+
     useEffect(() {
-      if(PlatformEnvironmentExtension.isTestingEnvironment) {
-        return (){};
+      if (PlatformEnvironmentExtension.isTestingEnvironment) {
+        return () {};
       }
       getGeolocationByLocation();
       return () {};
@@ -110,6 +116,13 @@ class HomePage extends HookWidget {
             ),
           ),
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: getBatteryLevel,
+        backgroundColor: Colors.green,
+        child: const Icon(
+          Icons.navigation,
+        ),
       ),
       body: ConnectedLoadable(
         converter: (s) => [

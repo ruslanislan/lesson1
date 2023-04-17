@@ -1,9 +1,8 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
-
-import 'presentation/home/home_page.dart';
-import 'resourses/strings.dart';
-import 'theme/weather_theme.dart';
+import 'package:lesson1/presentation/home/home_page.dart';
+import 'package:lesson1/resources/strings.dart';
+import 'package:lesson1/theme/weather_theme.dart';
 
 class WeatherApp extends StatefulWidget {
   const WeatherApp({Key? key}) : super(key: key);

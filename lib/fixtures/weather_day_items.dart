@@ -1,6 +1,6 @@
 
 import 'package:lesson1/models/weather_day.dart';
-import 'package:lesson1/resourses/images.dart';
+import 'package:lesson1/resources/images.dart';
 
 final testWeatherDays = <WeatherDay>[
   WeatherDay(

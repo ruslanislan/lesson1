@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-
-import '../../../models/network/responses/city_item/city_item.dart';
-import '../../../resourses/colors.dart';
+import 'package:lesson1/models/network/responses/city_item/city_item.dart';
+import 'package:lesson1/resources/colors.dart';
 
 class CitiesListItemWidget extends StatelessWidget {
   const CitiesListItemWidget({

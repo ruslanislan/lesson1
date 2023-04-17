@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../../../resourses/images.dart';
+import 'package:lesson1/resources/resources.dart';
 
 class PastSearchItemWidget extends StatelessWidget {
   const PastSearchItemWidget({

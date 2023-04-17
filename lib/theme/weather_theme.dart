@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../resourses/colors.dart';
+import 'package:lesson1/resources/colors.dart';
 
 const defaultFontFamily = 'Manrope';
 
