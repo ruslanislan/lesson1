@@ -40,14 +40,15 @@ void main() {
       );
 
       //Test widget creation
-      final page = TestStateWidget(
-        initialState: state,
-        child: const HomePage(),
+      const page = HomePage();
+
+      await tester.pumpWidgetBuilder(
+        page,
+        wrapper: (child) => TestStateWidget(
+          initialState: state,
+          child: child,
+        ),
       );
-
-      await tester.pumpWidget(page);
-
-      await tester.pump();
 
       //multiScreenGolden will run scenarios for given devices list
       await multiScreenGolden(

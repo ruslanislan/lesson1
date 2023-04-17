@@ -111,7 +111,7 @@ class HomePage extends HookWidget {
           children: [
             Expanded(
               child: PlatformEnvironmentExtension.isTestingEnvironment
-                  ? const TestWeatherToday()
+                  ? Container()
                   : const WeatherToday(),
             ),
             const WeatherDaysList(),
