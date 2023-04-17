@@ -66,6 +66,9 @@ class HomePage extends HookWidget {
     };
 
     useEffect(() {
+      if(PlatformEnvironmentExtension.isTestingEnvironment) {
+        return (){};
+      }
       getGeolocationByLocation();
       return () {};
     }, const []);
