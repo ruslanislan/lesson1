@@ -54,7 +54,6 @@ class TestWeatherToday extends StatelessWidget {
                     child: Text(
                       weatherDay.weatherDescription,
                       style: Theme.of(context).textTheme.headlineSmall,
-                      textScaleFactor: 1.0,
                     ),
                   ),
                 ],
