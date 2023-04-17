@@ -47,6 +47,8 @@ void main() {
 
       await tester.pumpWidget(page);
 
+      await tester.pump();
+
       //multiScreenGolden will run scenarios for given devices list
       await multiScreenGolden(
         tester,
