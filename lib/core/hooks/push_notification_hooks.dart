@@ -44,8 +44,6 @@ void usePushNotificationToken() {
   useEffect(
     () {
       Future<void> _initialize() async {
-        await Firebase.initializeApp();
-
         final firebaseMessaging = FirebaseMessaging.instance;
 
         firebaseMessaging
