@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:lesson1/core/app_store_connector.dart';
 import 'package:lesson1/models/weather_day.dart';
-import 'package:lesson1/resourses/images.dart';
-
-import '../../../core/app_store_connector.dart';
+import 'package:lesson1/resources/resources.dart';
 
 class TestWeatherToday extends StatelessWidget {
   const TestWeatherToday({

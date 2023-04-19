@@ -14,6 +14,8 @@ class _$AppState extends AppState {
   @override
   final PastSearchCitiesState pastSearchCities;
   @override
+  final BatteryState battery;
+  @override
   final BuiltMap<Object, OperationState> operationsState;
 
   factory _$AppState([void Function(AppStateBuilder)? updates]) =>
@@ -23,6 +25,7 @@ class _$AppState extends AppState {
       {required this.geolocation,
       required this.weather,
       required this.pastSearchCities,
+      required this.battery,
       required this.operationsState})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
@@ -30,6 +33,7 @@ class _$AppState extends AppState {
     BuiltValueNullFieldError.checkNotNull(weather, r'AppState', 'weather');
     BuiltValueNullFieldError.checkNotNull(
         pastSearchCities, r'AppState', 'pastSearchCities');
+    BuiltValueNullFieldError.checkNotNull(battery, r'AppState', 'battery');
     BuiltValueNullFieldError.checkNotNull(
         operationsState, r'AppState', 'operationsState');
   }
@@ -48,6 +52,7 @@ class _$AppState extends AppState {
         geolocation == other.geolocation &&
         weather == other.weather &&
         pastSearchCities == other.pastSearchCities &&
+        battery == other.battery &&
         operationsState == other.operationsState;
   }
 
@@ -57,6 +62,7 @@ class _$AppState extends AppState {
     _$hash = $jc(_$hash, geolocation.hashCode);
     _$hash = $jc(_$hash, weather.hashCode);
     _$hash = $jc(_$hash, pastSearchCities.hashCode);
+    _$hash = $jc(_$hash, battery.hashCode);
     _$hash = $jc(_$hash, operationsState.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
@@ -68,6 +74,7 @@ class _$AppState extends AppState {
           ..add('geolocation', geolocation)
           ..add('weather', weather)
           ..add('pastSearchCities', pastSearchCities)
+          ..add('battery', battery)
           ..add('operationsState', operationsState))
         .toString();
   }
@@ -93,6 +100,11 @@ class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
   set pastSearchCities(PastSearchCitiesStateBuilder? pastSearchCities) =>
       _$this._pastSearchCities = pastSearchCities;
 
+  BatteryStateBuilder? _battery;
+  BatteryStateBuilder get battery =>
+      _$this._battery ??= new BatteryStateBuilder();
+  set battery(BatteryStateBuilder? battery) => _$this._battery = battery;
+
   MapBuilder<Object, OperationState>? _operationsState;
   MapBuilder<Object, OperationState> get operationsState =>
       _$this._operationsState ??= new MapBuilder<Object, OperationState>();
@@ -107,6 +119,7 @@ class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
       _geolocation = $v.geolocation.toBuilder();
       _weather = $v.weather.toBuilder();
       _pastSearchCities = $v.pastSearchCities.toBuilder();
+      _battery = $v.battery.toBuilder();
       _operationsState = $v.operationsState.toBuilder();
       _$v = null;
     }
@@ -135,6 +148,7 @@ class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
               geolocation: geolocation.build(),
               weather: weather.build(),
               pastSearchCities: pastSearchCities.build(),
+              battery: battery.build(),
               operationsState: operationsState.build());
     } catch (_) {
       late String _$failedField;
@@ -145,6 +159,8 @@ class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
         weather.build();
         _$failedField = 'pastSearchCities';
         pastSearchCities.build();
+        _$failedField = 'battery';
+        battery.build();
         _$failedField = 'operationsState';
         operationsState.build();
       } catch (e) {

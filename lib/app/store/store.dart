@@ -1,6 +1,7 @@
 import 'package:async_redux/async_redux.dart';
 import 'package:get_it/get_it.dart';
 import 'package:lesson1/api_client/weather_api_client.dart';
+import 'package:lesson1/services/battery_service.dart';
 import 'package:lesson1/services/weather_service.dart';
 import 'package:lesson1/utils/error_recorder.dart';
 
@@ -24,10 +25,12 @@ Store<AppState> configureStore() {
 
 void configureDependencyInjection(WeatherApiClient apiClient) {
   final geolocationService = GeolocationService();
+  final batteryService = BatteryService();
   final weatherService = WeatherService(
     apiClient,
     ErrorRecorder(context: (WeatherService).toString()),
   );
   GetIt.I.registerSingleton<GeolocationService>(geolocationService);
+  GetIt.I.registerSingleton<BatteryService>(batteryService);
   GetIt.I.registerSingleton<WeatherService>(weatherService);
 }

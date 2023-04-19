@@ -2,11 +2,9 @@ library weather_state;
 
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
-
-import '../../models/network/responses/city_item/city_item.dart';
-import '../../models/weather_day.dart';
-import '../../resourses/images.dart';
-import '../../resourses/strings.dart';
+import 'package:lesson1/models/network/responses/city_item/city_item.dart';
+import 'package:lesson1/models/weather_day.dart';
+import 'package:lesson1/resources/resources.dart';
 
 part 'weather_state.g.dart';
 

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../../../resourses/colors.dart';
+import 'package:lesson1/resources/resources.dart';
 
 class LinkText extends StatelessWidget {
   const LinkText({

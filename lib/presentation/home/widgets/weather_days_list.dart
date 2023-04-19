@@ -1,10 +1,9 @@
 import 'package:dash_kit_core/dash_kit_core.dart';
 import 'package:flutter/material.dart';
-import 'package:lesson1/resourses/colors.dart';
-
-import '../../../core/app_store_connector.dart';
-import '../../../models/weather_day.dart';
-import 'weather_list_item.dart';
+import 'package:lesson1/core/app_store_connector.dart';
+import 'package:lesson1/models/weather_day.dart';
+import 'package:lesson1/presentation/home/widgets/weather_list_item.dart';
+import 'package:lesson1/resources/resources.dart';
 
 class WeatherDaysList extends StatelessWidget {
   const WeatherDaysList({Key? key}) : super(key: key);

@@ -1,9 +1,8 @@
 import 'package:built_collection/built_collection.dart';
 import 'package:flutter/material.dart';
-
-import '../../../resourses/strings.dart';
-import 'link_text.dart';
-import 'past_search_item_widget.dart';
+import 'package:lesson1/presentation/search/widgets/link_text.dart';
+import 'package:lesson1/presentation/search/widgets/past_search_item_widget.dart';
+import 'package:lesson1/resources/resources.dart';
 
 class PastSearchBlock extends StatefulWidget {
   const PastSearchBlock({

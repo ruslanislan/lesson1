@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-
-import '../../../resourses/colors.dart';
-import '../../../resourses/images.dart';
+import 'package:lesson1/resources/resources.dart';
 
 class CurrentLocationWidget extends StatelessWidget {
   const CurrentLocationWidget({

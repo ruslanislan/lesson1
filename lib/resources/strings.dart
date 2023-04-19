@@ -7,4 +7,6 @@ class Strings {
   static const monday = 'Monday';
   static const oops = 'Oops!';
   static const ok = 'Ok';
+  static const unknownBattery = 'Unknown battery level.';
+  static const batteryLevel = 'Battery Level';
 }

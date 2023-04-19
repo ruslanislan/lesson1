@@ -1,21 +1,15 @@
 import 'package:dash_kit_core/dash_kit_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:lesson1/core/app_store_connector.dart';
 import 'package:lesson1/features/past_search_cities/actions/add_past_search_city_action.dart';
 import 'package:lesson1/features/past_search_cities/actions/clear_past_search_cities_action.dart';
+import 'package:lesson1/features/weather/actions/get_weather_by_city_name_action.dart';
+import 'package:lesson1/fixtures/city_items.dart';
 import 'package:lesson1/models/network/responses/city_item/city_item.dart';
-
-import '../../core/app_store_connector.dart';
-import '../../features/weather/actions/get_weather_by_city_name_action.dart';
-import '../../fixtures/city_items.dart';
-import '../../navigation/app_router.dart';
-import '../../resourses/colors.dart';
-import '../../resourses/images.dart';
-import '../../resourses/strings.dart';
-import 'widgets/cities_list_item_widget.dart';
-import 'widgets/current_location_widget.dart';
-import 'widgets/past_search_block.dart';
-import 'widgets/search_text_field.dart';
+import 'package:lesson1/navigation/app_router.dart';
+import 'package:lesson1/presentation/search/widgets/widgets.dart';
+import 'package:lesson1/resources/resources.dart';
 
 class SearchPage extends HookWidget {
   const SearchPage({
