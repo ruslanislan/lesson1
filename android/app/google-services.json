@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "962371970108",
+    "project_id": "weather-app-ee71b",
+    "storage_bucket": "weather-app-ee71b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:962371970108:android:279d59ceb832e496408f39",
+        "android_client_info": {
+          "package_name": "com.example.lesson1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "962371970108-oskdueu4k82aefppkeflo4mkukvb5l0p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA31aEQJ698NxEtAcyxPUqGtDBbo_TAaIo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "962371970108-oskdueu4k82aefppkeflo4mkukvb5l0p.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "962371970108-i120ing3rvevtc7f35pif4l0hntg9p4n.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.lesson1"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

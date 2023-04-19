@@ -1,11 +1,20 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 
 import 'presentation/home/home_page.dart';
 import 'resourses/strings.dart';
 import 'theme/weather_theme.dart';
 
-class WeatherApp extends StatelessWidget {
+class WeatherApp extends StatefulWidget {
   const WeatherApp({Key? key}) : super(key: key);
+
+  @override
+  State<WeatherApp> createState() => _WeatherAppState();
+}
+
+class _WeatherAppState extends State<WeatherApp> {
+
+  final analytics = FirebaseAnalytics.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -14,6 +23,10 @@ class WeatherApp extends StatelessWidget {
         title: Strings.appName,
         theme: WeatherTheme.lightTheme,
         home: const HomePage(),
+        navigatorObservers: [
+          FirebaseAnalyticsObserver(analytics: analytics),
+        ],
+        debugShowCheckedModeBanner: false,
       ),
     );
   }
