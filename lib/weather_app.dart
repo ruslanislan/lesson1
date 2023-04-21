@@ -21,7 +21,7 @@ class _WeatherAppState extends State<WeatherApp> {
       child: MaterialApp(
         title: Strings.appName,
         theme: WeatherTheme.lightTheme,
-        home: const HomePage(),
+        home: HomePage(),
         navigatorObservers: [
           FirebaseAnalyticsObserver(analytics: analytics),
         ],

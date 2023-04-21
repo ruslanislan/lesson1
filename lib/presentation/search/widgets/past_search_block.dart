@@ -11,7 +11,7 @@ class PastSearchBlock extends StatefulWidget {
     Key? key,
   }) : super(key: key);
 
-  final BuiltList<String> pastSearchCities;
+  final List<String> pastSearchCities;
   final VoidCallback onClearAllTap;
 
   @override
