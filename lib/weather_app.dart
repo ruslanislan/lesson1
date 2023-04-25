@@ -1,5 +1,6 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lesson1/presentation/home/home_page.dart';
 import 'package:lesson1/resources/strings.dart';
 import 'package:lesson1/theme/weather_theme.dart';
@@ -21,7 +22,7 @@ class _WeatherAppState extends State<WeatherApp> {
       child: MaterialApp(
         title: Strings.appName,
         theme: WeatherTheme.lightTheme,
-        home: HomePage(),
+        home: HomePage(weatherBloc: BlocProvider.of(context)),
         navigatorObservers: [
           FirebaseAnalyticsObserver(analytics: analytics),
         ],

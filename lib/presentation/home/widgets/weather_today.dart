@@ -38,6 +38,32 @@ class _WeatherTodayState extends State<WeatherToday>
       curve: Curves.easeOut,
     );
     _animation = Tween<double>(begin: 0, end: 8).animate(_curve);
+
+    _animationController.forward();
+
+    _animationController.addStatusListener(listener);
+  }
+
+  void listener(AnimationStatus status) {
+    switch (status) {
+      case AnimationStatus.dismissed:
+        _animationController.forward();
+        break;
+      case AnimationStatus.forward:
+        break;
+      case AnimationStatus.reverse:
+        break;
+      case AnimationStatus.completed:
+        _animationController.reverse();
+        break;
+    }
+  }
+
+  @override
+  void dispose() {
+    _animationController.removeStatusListener(listener);
+    _animationController.dispose();
+    super.dispose();
   }
 
   @override

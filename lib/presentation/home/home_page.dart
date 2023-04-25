@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:lesson1/blocs/weather/weather_bloc.dart';
 import 'package:lesson1/fixtures/weather_day_items.dart';
 import 'package:lesson1/navigation/app_router.dart';
 import 'package:lesson1/presentation/home/widgets/widgets.dart';
@@ -10,8 +12,10 @@ import 'package:lesson1/utils/extensions.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({
-    Key? key,
+    Key? key, required this.weatherBloc,
   }) : super(key: key);
+
+  final WeatherBloc weatherBloc;
 
   void showSimpleDialog({
     required BuildContext context,
@@ -26,7 +30,9 @@ class HomePage extends StatelessWidget {
           content: Text(text),
           actions: [
             CupertinoDialogAction(
-              onPressed: Navigator.of(context).pop,
+              onPressed: Navigator
+                  .of(context)
+                  .pop,
               child: const Text(Strings.ok),
             ),
           ],
@@ -61,51 +67,66 @@ class HomePage extends StatelessWidget {
     //   );
     // };
 
-    return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          onPressed: () {},
-          icon: SvgPicture.asset(
-            Images.icLocation,
-            colorFilter: ColorFilter.mode(
-              Colors.indigo.shade900,
-              BlendMode.srcIn,
-            ),
-          ),
-        ),
-        actions: [
-          IconButton(
-            onPressed: () => appRouter.goTo(
-              context: context,
-              route: SearchPage(),
-            ),
+    return BlocListener(
+      bloc: weatherBloc,
+      listener: _listener,
+      child: Scaffold(
+        appBar: AppBar(
+          leading: IconButton(
+            onPressed: () => weatherBloc.add(GetGeolocationWeatherEvent()),
             icon: SvgPicture.asset(
-              Images.icSearch,
+              Images.icLocation,
               colorFilter: ColorFilter.mode(
                 Colors.indigo.shade900,
                 BlendMode.srcIn,
               ),
             ),
           ),
-        ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        backgroundColor: Colors.green,
-        child: const Icon(
-          Icons.navigation,
+          actions: [
+            IconButton(
+              onPressed: () =>
+                  appRouter.goTo(
+                    context: context,
+                    route: const SearchPage(),
+                  ),
+              icon: SvgPicture.asset(
+                Images.icSearch,
+                colorFilter: ColorFilter.mode(
+                  Colors.indigo.shade900,
+                  BlendMode.srcIn,
+                ),
+              ),
+            ),
+          ],
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {},
+          backgroundColor: Colors.green,
+          child: const Icon(
+            Icons.navigation,
+          ),
+        ),
+        body: Column(
+          children: [
+            Expanded(
+              child: PlatformEnvironmentExtension.isTestingEnvironment
+                  ? TestWeatherToday(weatherDay: testWeatherDays.first)
+                  : WeatherToday(weatherDay: testWeatherDays.first),
+            ),
+            const WeatherDaysList(),
+          ],
         ),
       ),
-      body: Column(
-        children: [
-          Expanded(
-            child: PlatformEnvironmentExtension.isTestingEnvironment
-                ? TestWeatherToday(weatherDay: testWeatherDays.first)
-                : WeatherToday(weatherDay: testWeatherDays.first),
-          ),
-          const WeatherDaysList(),
-        ],
-      ),
     );
+  }
+
+  void _listener(BuildContext context, WeatherState state) {
+    if(state.showDialog){
+      showSimpleDialog(
+        context: context,
+        title: state.title ?? 'Oops!',
+        text: state.text ?? 'Unexpected error',
+      );
+    }
   }
 }
